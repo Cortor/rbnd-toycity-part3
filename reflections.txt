@@ -1,0 +1,65 @@
+How Long did you spend working on this project ?
+
+I have been working approximately 3 days on this project.
+It might seem to be too much...But I take the opportunity to go back to the course and make some reseach in Ruby books.
+
+What is the most rewarding challenge you conquered ?
+
+This project has been easier to complete for me than the past ones. It seems that the Ruby infusion is slowly percolating.
+
+
+What two additional features did you build ? Why ?
+
+First new feature : error handling
+
+The first new feature deals with error handling. I added rescue clauses in three methods that allow the script to be executed in case of an error. 
+I think it is important to handle errors so as not to let the user stuck.  
+
+add_to products method (In the Product class)
+
+In this method, I added a rescue clause to a begin/end block. 
+If the DuplicateProduct error is raised, the code within the rescue clause is run and the execution continues normally. 
+The product is not added to the @@products array.
+
+add_to_customers (In the Customer class)
+
+The implementation is more or less the same as in the add_to_products method.
+I added a rescue clause to a begin/end block.
+If the DuplicateCustomerError is raised, the code within the rescue clause is run and the execution goes on.
+The customer is not added to the @@customers array.
+
+update_stock (In the Transaction class)
+
+In this method, I added a rescue clause to a begin/end block.
+If the OutOfStockError is raised, the code within the rescue clause is run. 
+I added a method in the rescue clause to let the user know which products have a stock > 0 and can be purchased.
+The stock is not updated.
+
+As a complement to the OutOfStockError, the transaction is not added to the @@transactions array. 
+Please let me know if it is correct to manage it that way even if it was not strictly asked.
+
+ 
+
+Second new feature : possibility to return a product
+
+I added the possibility for a customer to return a product. This feature is important for a retail business. 
+The customer has usualy the possibility to return a purchase.
+
+To that purpose, I added a third argument for initializing a transaction. This argument is the mvt(movement) argument. This is a bolean
+It has a default value to true for a purchase (hence a false value for a return).
+This argument is used in the update_stock method.
+In case of a purchase, the stock decreases by 1, in case of a return, the stock increases by 1. 
+I made a modification on the purchase method which accepts a mvt (movement) argument; true for a purchase, false for a return. 
+A customer can now make a return with the same purchase method.
+
+
+Where do you still have room to grow ?
+
+I think I still have to grow in concentration. I devote too much time to each chapter and project. 
+I think that if I were more focused, I would be more effective.
+
+I need to improve my communication skills. 
+I have been studying in a system where the stress was put on a student ability to do things on his own without bothering the others for fear of not being relevant.
+
+And for sure I have also to develop my developer's skills.
+
