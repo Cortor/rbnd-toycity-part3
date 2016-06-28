@@ -1,9 +1,9 @@
 class Product
 
-  attr_reader :title, :price, :stock
-  attr_writer:stock # we need to be able to modify the stock attribute of given product when there is a transaction.
+  attr_accessor :stock # we need to be able to modify the stock attribute of given product when there is a transaction.
+  attr_reader :title, :price
 
-  @@products = [] # @@ products will help help us keep track of Product objects that will be created
+  @@products = [] # @@ products will help us keep track of Product objects that will be created
 
   def initialize(options ={}) # we use an option hash for the arguments
    @title = options[:title]
@@ -21,7 +21,7 @@ class Product
   end
 
   def self.in_stock # this class method finds the product instances with a stock > 0. It uses the "in_stock?"instance method
-   @@products.find_all {|product| product.in_stock? == true}
+   @@products.find_all {|product| product.in_stock?}
   end
 
   def self.available # this class method is part of a first new feature. If a transaction (see Transaction object) is made on a product which is not in stock anymore we put a message with the other products that are available
@@ -29,20 +29,15 @@ class Product
   end
 
   def self.include?(value) # this class method returns a boolean value when searching a product with a given title in @@products. It uses the find_by_title class method described above
-    a = self.in_stock
-    if a.find_by_title(value)
-      return true
+    products_in_stock = self.in_stock
+    if products_in_stock.find_by_title(value)
     else
       return false
     end
   end
 
   def in_stock? # this instance method evaluates if the stock for a product is > 0
-    if @stock > 0
-      return true
-    else
-      return false
-    end
+    @stock > 0
   end
 
   private
@@ -58,6 +53,6 @@ class Product
     rescue DuplicateProductError => error # the rescue clause allows the script to go on in case of error
      puts "Attention : #{error.message}"
     end
- end
+  end
 
 end

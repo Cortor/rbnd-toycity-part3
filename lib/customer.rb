@@ -4,17 +4,17 @@ class Customer
 
   @@customers = [] # @@customer will help help us keep track of Customer objects that will be created
 
-  def self.all # this class method returns the @@customer array
-   @@customers
-  end
-
   def initialize (options = {}) # we use an option hash for the arguments
     @name = options[:name]
     add_to_customers
   end
 
-  def purchase(product, mvt = true) # method to instanciate a new Transaction object from a Customer object
-    Transaction.new(@name,product, mvt)
+  def purchase(product, buy = true) # method to instanciate a new Transaction object from a Customer object
+    Transaction.new(@name,product, buy)
+  end
+
+  def self.all # this class method returns the @@customer array
+   @@customers
   end
 
   def self.find_by_name(name) # this class method finds the instance stored in @@customers with a given name
@@ -30,9 +30,9 @@ class Customer
           raise DuplicateCustomerError, "#{name} already exists" # see the corresponding error object
         end
       end
-    @@customers << self # adds the customer instance the @@customers array
-  rescue DuplicateCustomerError => error # the rescue clause allows the script to go on in case of error
-    puts "Attention : #{error.message}. He will not be created twice !"
+      @@customers << self # adds the customer instance the @@customers array
+    rescue DuplicateCustomerError => error # the rescue clause allows the script to go on in case of error
+      puts "Attention : #{error.message}. He will not be created twice !"
     end
   end
 
